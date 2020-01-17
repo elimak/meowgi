@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Meowgi</string>
+    <string name="check_your_connectivity">Unable to retrieve the data\nPlease check your connectivity</string>
+    <string name="category">Category</string>
+    <string name="favorites">Favorites</string>
+    <string name="select_your_category">Select your category to start browsing our cat pictures</string>
+    <string name="search_by_categories">Search pictures by categories</string>
+    <string name="search_result">Search results</string>
+    <string name="about">About</string>
+    <string name="favorites_count">You have %1$d favorites</string>
+    <string name="favorite_one">You have 1 favorite</string>
+
+    <string name="architecture_title">Core setup:</string>string>
+    <string name="third_party_title">3rd party Libraries used in the demo:</string>string>
+    <string name="additional_title">Additional UX / Design features:</string>string>
+
+    <string name="architecture_list">- Kotlin\n- MVVM architecture using JetPack ViewModel\n- Navigation done via Jetpack Navigation component\n- Coroutines / Flow for asynchronous tasks and event broadcast\n- Room for caching the loaded data and persisting the favorites\n- LiveData and Databindings to render the screens states</string>
+    <string name="third_party_list">- Dagger 2 for dependency injection\n- Retrofit 2 and Gson for http / Rest requests\n- Glide to load images easily\n- Binding Collection Adapter to facilitate databinding in the recyclerView</string>
+    <string name="additional_list">- Splash screen\n- Usage of \"include\" layout in order to demo \"reusable\" visual components\n- Transition: enter / exit are animated for a nicer experience\n- Toolbar menu item and about page to list the content of this app so you dont miss anything :)\n- All icons are vector based to support multiple screen densitity and size</string>
+
+    <string name="demo_app_for_krikey">Demo App for Krikey</string>
+    <string name="built_by_valerie_alloix">Built by Valerie Alloix</string>
+</resources>

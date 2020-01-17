@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.about.About"
+    android:background="@color/light">
+
+    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="15dp">
+
+            <TextView
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/demo_app_for_krikey"
+                android:gravity="center"
+                android:layout_marginTop="20dp"/>
+
+            <TextView
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/built_by_valerie_alloix"
+                android:layout_marginBottom="30dp"
+                android:gravity="center"/>
+
+            <TextView
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/architecture_title"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/architecture_list"
+                android:layout_marginStart="20dp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/third_party_title"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/third_party_list"
+                android:layout_marginStart="20dp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginBottom="30dp"/>
+
+            <TextView
+                style="@style/Title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/additional_title"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                style="@style/Text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/additional_list"
+                android:layout_marginStart="20dp"
+                android:lineSpacingExtra="3dp"
+                android:layout_marginBottom="30dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

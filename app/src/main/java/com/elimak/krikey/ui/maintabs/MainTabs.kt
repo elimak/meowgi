@@ -1,6 +1,7 @@
 package com.elimak.krikey.ui.maintabs
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction

@@ -1,8 +1,7 @@
 package com.elimak.krikey.ui.searchresult
 
 import android.app.Application
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import com.elimak.krikey.App
 import com.elimak.krikey.db.vo.ResultPic
 import com.elimak.krikey.repository.IFavoriteRepository
@@ -17,21 +16,21 @@ class CardResultViewModel(dataPoint: ResultPic, application: Application) : View
     @Inject
     lateinit var repository: IFavoriteRepository
 
-    val data: ObservableField<ResultPic> = ObservableField()
-    val favorite: ObservableBoolean = ObservableBoolean(false)
+    val data: MutableLiveData<ResultPic> = MutableLiveData()
+    val favorite: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init {
-        App.instance.getApplicationComponent().inject(this)
-        data.set(dataPoint)
+        App.injector.inject(this)
+        data.value = dataPoint
 
-        favorite.set(repository.isFavorite(dataPoint))
+        favorite.value = repository.isFavorite(dataPoint)
     }
 
     fun onFavorite() {
-        if(data.get() != null){
+        if(data.value != null){
             viewModelScope.launch {
-                repository.updateFavorite(data.get()!!, !favorite.get())
-                favorite.set(!favorite.get())
+                repository.updateFavorite(data.value!!, !favorite.value!!)
+                favorite.value = !favorite.value!!
             }
         }
     }

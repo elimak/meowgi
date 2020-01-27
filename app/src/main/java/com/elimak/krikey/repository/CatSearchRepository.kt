@@ -6,19 +6,22 @@ import com.elimak.krikey.api.IApiServices
 import com.elimak.krikey.db.AppDatabase
 import com.elimak.krikey.db.vo.Category
 import com.elimak.krikey.db.vo.ResultPic
+import com.elimak.krikey.repository.base.RepositoryBase
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class CatSearchRepository @Inject constructor(private var context: Context) : ICatSearchRepository {
+@ExperimentalCoroutinesApi
+class CatSearchRepository @Inject constructor(private var context: Context) : RepositoryBase(), ICatSearchRepository {
 
     @Inject
     lateinit var api: IApiServices
     private var database: AppDatabase
 
     init {
-        App.instance.getApplicationComponent().inject(this)
+        App.injector.inject(this)
         database = AppDatabase.getDatabase(context)
     }
 

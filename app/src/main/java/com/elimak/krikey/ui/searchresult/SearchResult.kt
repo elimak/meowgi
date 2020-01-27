@@ -40,7 +40,8 @@ class SearchResult : FragmentBase() {
         // Get the catId passed through the Navigation component
         val catId = arguments?.let { SearchResultArgs.fromBundle(arguments!!).catId }
         if (catId != null) {
-            viewModel.catId.set(catId)
+            viewModel.catId.value = catId
+            viewModel.render()
         }
     }
 

@@ -39,6 +39,6 @@ open class ResultViewModel(application: Application) : ViewModelBase(application
     // --- End of list items bindings
 
     init {
-        App.instance.getApplicationComponent().inject(this)
+        App.injector.inject(this)
     }
 }

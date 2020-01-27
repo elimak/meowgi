@@ -29,12 +29,12 @@ interface IApiServices {
                 .addConverterFactory(GsonConverterFactory.create())
                 .baseUrl(BASE_URL)
                 .client(httpClient.addInterceptor{chain->
-                    val original = chain.request()
-                    val requestBuilder = original.newBuilder()
-                        .header("x-api-key", R.string.cat_api_key.toString())
-                    val request = requestBuilder.build()
-                    chain.proceed(request)
-                }.build())
+                        val original = chain.request()
+                        val requestBuilder = original.newBuilder()
+                            .header("x-api-key", R.string.cat_api_key.toString())
+                        val request = requestBuilder.build()
+                        chain.proceed(request)
+                    }.build())
                 .build()
 
             return retrofit.create(IApiServices::class.java)

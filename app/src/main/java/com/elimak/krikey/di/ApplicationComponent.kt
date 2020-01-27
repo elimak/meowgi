@@ -15,8 +15,8 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = arrayOf(ApplicationModule::class))
 interface ApplicationComponent {
-
     fun inject(application: App)
+
     fun inject(viewModel: CardCategoryViewModel)
     fun inject(viewModel: ListViewModel)
     fun inject(viewModel: MainTabsViewModel)

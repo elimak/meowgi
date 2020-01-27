@@ -3,51 +3,43 @@ package com.elimak.krikey.repository
 import android.content.Context
 import com.elimak.krikey.db.AppDatabase
 import com.elimak.krikey.db.vo.ResultPic
+import com.elimak.krikey.repository.base.ASignal
+import com.elimak.krikey.repository.base.RepositoryBase
 import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.BroadcastChannel
-import kotlinx.coroutines.channels.ReceiveChannel
 import javax.inject.Inject
 
-class FavoriteRepository @Inject constructor(private var context: Context) : IFavoriteRepository {
+@ExperimentalCoroutinesApi
+class FavoriteRepository @Inject constructor(private val context: Context) : RepositoryBase(), IFavoriteRepository {
 
-    private var database: AppDatabase = AppDatabase.getDatabase(context)
+    private val database: AppDatabase = AppDatabase.getDatabase(context)
     private var favoriteList: MutableList<ResultPic> = mutableListOf()
 
-    private val publishUpdateCount = BroadcastChannel<Int>(1)
-    override val updateCount: ReceiveChannel<Int>
-        get() = publishUpdateCount.openSubscription()
+    class DeleteFavorite(data: ResultPic) : ASignal<ResultPic>(data)
+    class FavoriteCount(data: Int) : ASignal<Int>(data)
 
-    private val publishDelete = BroadcastChannel<ResultPic>(1)
-    override val updateDelete: ReceiveChannel<ResultPic>
-        get() = publishDelete.openSubscription()
-
-    override suspend fun updateFavorite(resultPic: ResultPic, favorite: Boolean): Boolean {
-        return withContext(Dispatchers.IO) {
-            var success = false
+    override suspend fun updateFavorite(resultPic: ResultPic, favorite: Boolean) {
+        withContext(Dispatchers.IO) {
             if(favorite) {
-                val result = database.favoriteDao().insertPic(resultPic)
-                success = true
+                database.favoriteDao().insertPic(resultPic)
             } else {
-                val result = database.favoriteDao().deletePicById(resultPic.id)
-                publishDelete.send(resultPic)
-                success = true
+                database.favoriteDao().deletePicById(resultPic.id)
+                publisher.send(DeleteFavorite(resultPic))
             }
             favoriteList.clear()
             favoriteList.addAll(database.favoriteDao().getAll())
-            success
         }
     }
 
     override fun isFavorite(pic: ResultPic) : Boolean {
-        return favoriteList.filter { it.id == pic.id}.size > 0
+        return favoriteList.filter { it.id == pic.id }.isNotEmpty()
     }
 
     override suspend fun initiateFavorite() {
-        return withContext(Dispatchers.IO) {
+        withContext(Dispatchers.IO) {
             if (favoriteList.size == 0) {
                 favoriteList.addAll(database.favoriteDao().getAll())
             }
-            publishUpdateCount.send(favoriteList.size)
+            publisher.send(FavoriteCount(favoriteList.size))
         }
     }
 

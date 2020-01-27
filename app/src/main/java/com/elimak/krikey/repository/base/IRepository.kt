@@ -1,4 +1,4 @@
-package com.elimak.krikey.repository
+package com.elimak.krikey.repository.base
 
 import com.elimak.demo.krikey.repository.ISignal
 import kotlinx.coroutines.channels.ReceiveChannel

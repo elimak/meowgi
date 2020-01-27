@@ -1,13 +1,12 @@
 package com.elimak.krikey.repository
 
 import com.elimak.krikey.db.vo.ResultPic
+import com.elimak.krikey.repository.base.IRepository
 import kotlinx.coroutines.channels.ReceiveChannel
 
-interface IFavoriteRepository {
-    suspend fun updateFavorite(id: ResultPic, favorite: Boolean) : Boolean
+interface IFavoriteRepository: IRepository {
+    suspend fun updateFavorite(resultPic: ResultPic, favorite: Boolean)
     fun isFavorite(pic: ResultPic) : Boolean
     suspend fun initiateFavorite()
-    val updateCount: ReceiveChannel<Int>
-    val updateDelete: ReceiveChannel<ResultPic>
     fun getFavorites(): MutableList<ResultPic>
 }

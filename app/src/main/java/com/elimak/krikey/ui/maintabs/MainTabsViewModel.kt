@@ -17,7 +17,7 @@ class MainTabsViewModel(application: Application) : ViewModelBase(application) {
     lateinit var repository: IFavoriteRepository
 
     init {
-        App.instance.getApplicationComponent().inject(this)
+        App.injector.inject(this)
         viewModelScope.launch {
             repository.initiateFavorite()
         }

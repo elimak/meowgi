@@ -1,7 +1,6 @@
 package com.elimak.krikey.ui.categories
 
 import android.app.Application
-import android.util.Log
 import android.widget.Toast
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList
@@ -40,7 +39,7 @@ class ListViewModel(application: Application) : ViewModelBase(application) {
     val errorVisible: MutableLiveData<Boolean> = MutableLiveData(false)
 
     init {
-        App.instance.getApplicationComponent().inject(this)
+        App.injector.inject(this)
         loadData()
     }
 

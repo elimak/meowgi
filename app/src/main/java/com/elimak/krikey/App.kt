@@ -6,27 +6,21 @@ import com.elimak.krikey.di.ApplicationModule
 import com.elimak.krikey.di.DaggerApplicationComponent
 
 class App: Application() {
-    lateinit var component: ApplicationComponent
-
     override fun onCreate() {
         super.onCreate()
-
         instance = this
         setup()
     }
 
     fun setup() {
-        component = DaggerApplicationComponent.builder()
+        injector = DaggerApplicationComponent.builder()
             .applicationModule(ApplicationModule(this))
             .build()
-        component.inject(this)
-    }
-
-    fun getApplicationComponent(): ApplicationComponent {
-        return component
+        injector.inject(this)
     }
 
     companion object {
         lateinit var instance: App private set
+        lateinit var injector: ApplicationComponent private set
     }
 }

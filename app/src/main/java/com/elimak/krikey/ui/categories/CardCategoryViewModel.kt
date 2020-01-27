@@ -1,7 +1,7 @@
 package com.elimak.krikey.ui.categories
 
 import android.view.View
-import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import androidx.navigation.Navigation
 import com.elimak.krikey.App
 import com.elimak.krikey.db.vo.Category
@@ -16,17 +16,17 @@ class CardCategoryViewModel(dataPoint: Category) {
     @Inject
     lateinit var repository: ICatSearchRepository
 
-    val data: ObservableField<Category> = ObservableField()
+    val data: MutableLiveData<Category> = MutableLiveData()
 
     init {
-        App.instance.getApplicationComponent().inject(this)
-        data.set(dataPoint)
+        App.injector.inject(this)
+        data.value = dataPoint
     }
 
     fun onClick(view: View) {
-        if(data.get() != null) {
+        if(data.value != null) {
             val action = MainTabsDirections.actionToSearchResult()
-            action.setCatId(data.get()!!.id)
+            action.setCatId(data.value!!.id)
             Navigation.findNavController(view).navigate(action)
         }
     }
